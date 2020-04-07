@@ -39,7 +39,21 @@
         map.on('load', function () {
             map.addSource('riker', {
                 'type': 'geojson',
-                'data': '/riker.geojson'
+                'data': 'https://raw.githubusercontent.com/tgb20/HAB-Mapbox-FlightPath/master/riker.geojson'
+            });
+            map.addLayer({
+                'id': 'flightpath',
+                'type': 'circle',
+                'source': 'riker',
+                'paint': {
+                    'circle-color': {
+                        property: 'temperature',
+                        stops: [
+                            [-47, '#0000ff'],
+                            [30, '#ff0000']
+                        ]
+                    }
+                }
             });
         });
     </script>
