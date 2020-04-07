@@ -39,20 +39,23 @@
         map.on('load', function () {
             map.addSource('riker', {
                 'type': 'geojson',
-                'data': 'https://raw.githubusercontent.com/tgb20/HAB-Mapbox-FlightPath/master/riker.geojson'
+                'maxzoom': 7,
+                'data': 'https://raw.githubusercontent.com/tgb20/HAB-Mapbox-FlightPath/master/rikerpolygon.geojson'
             });
             map.addLayer({
                 'id': 'flightpath',
-                'type': 'circle',
+                'type': 'fill-extrusion',
                 'source': 'riker',
                 'paint': {
-                    'circle-color': {
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-color': {
                         property: 'temperature',
                         stops: [
                             [-47, '#0000ff'],
                             [30, '#ff0000']
                         ]
-                    }
+                    },
+                    'fill-extrusion-base': 0
                 }
             });
         });
